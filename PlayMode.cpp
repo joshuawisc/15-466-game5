@@ -218,7 +218,7 @@ void PlayMode::update(float elapsed) {
 
 		for (auto &transform : scene.transforms) {
 			if (transform.name[0] == 'C') {
-				float speed = 0.05;
+				float speed = 0.05f;
 				if (transform.name[1] == 'R') {
 					transform.position.y += speed;
 					if (transform.position.y > 2)
@@ -296,7 +296,7 @@ void PlayMode::draw(glm::uvec2 const &drawable_size) {
 			0.0f, 0.0f, 0.0f, 1.0f
 		));
 
-		constexpr float H = 0.09f;
+		float H = 0.09f;
 		lines.draw_text("Mouse motion looks; WASD moves; escape ungrabs mouse",
 			glm::vec3(-aspect + 0.1f * H, -1.0 + 0.1f * H, 0.0),
 			glm::vec3(H, 0.0f, 0.0f), glm::vec3(0.0f, H, 0.0f),
@@ -307,7 +307,7 @@ void PlayMode::draw(glm::uvec2 const &drawable_size) {
 			glm::vec3(H, 0.0f, 0.0f), glm::vec3(0.0f, H, 0.0f),
 			glm::u8vec4(0xff, 0xff, 0xff, 0x00));
 		if (lost) {
-			float H = 0.3f;
+			H = 0.3f;
 			lines.draw_text("L + Cube Concussion",
 			glm::vec3(-aspect + 0.5f + 0.1f * H, 0.1f * H, 0.0),
 			glm::vec3(H, 0.0f, 0.0f), glm::vec3(0.0f, H, 0.0f),
