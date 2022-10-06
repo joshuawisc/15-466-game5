@@ -28,6 +28,8 @@ struct PlayMode : Mode {
 	//local copy of the game scene (so code can change it during gameplay):
 	Scene scene;
 
+	bool lost;
+
 	//player info:
 	struct Player {
 		WalkPoint at;

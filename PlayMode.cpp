@@ -66,6 +66,8 @@ PlayMode::PlayMode() : scene(*phonebank_scene) {
 	//start player walking at nearest walk point:
 	player.at = walkmesh->nearest_walk_point(player.transform->position);
 
+	lost = false;
+
 }
 
 PlayMode::~PlayMode() {
@@ -150,6 +152,8 @@ void PlayMode::update(float elapsed) {
 		//make it so that moving diagonally doesn't go faster:
 		if (move != glm::vec2(0.0f)) move = glm::normalize(move) * PlayerSpeed * elapsed;
 
+		
+
 		//get move in world coordinate system:
 		glm::vec3 remain = player.transform->make_local_to_world() * glm::vec4(move.x, move.y, 0.0f, 0.0f);
 
@@ -211,6 +215,26 @@ void PlayMode::update(float elapsed) {
 			);
 			player.transform->rotation = glm::normalize(adjust * player.transform->rotation);
 		}
+
+		for (auto &transform : scene.transforms) {
+			if (transform.name[0] == 'C') {
+				float speed = 0.05;
+				if (transform.name[1] == 'R') {
+					transform.position.y += speed;
+					if (transform.position.y > 2)
+						transform.position.y = -2;
+				} else {
+					transform.position.y -= speed;
+					if (transform.position.y < -2)
+						transform.position.y = 2;
+				}
+				if (glm::distance(transform.position, player.transform->position) < 0.9) {
+					lost = true;
+				}
+			}
+			
+		}
+		
 
 		/*
 		glm::mat4x3 frame = camera->transform->make_local_to_parent();
@@ -282,6 +306,13 @@ void PlayMode::draw(glm::uvec2 const &drawable_size) {
 			glm::vec3(-aspect + 0.1f * H + ofs, -1.0 + + 0.1f * H + ofs, 0.0),
 			glm::vec3(H, 0.0f, 0.0f), glm::vec3(0.0f, H, 0.0f),
 			glm::u8vec4(0xff, 0xff, 0xff, 0x00));
+		if (lost) {
+			float H = 0.3f;
+			lines.draw_text("L + Cube Concussion",
+			glm::vec3(-aspect + 0.5f + 0.1f * H, 0.1f * H, 0.0),
+			glm::vec3(H, 0.0f, 0.0f), glm::vec3(0.0f, H, 0.0f),
+			glm::u8vec4(0x00, 0x00, 0x00, 0x00));
+		}
 	}
 	GL_ERRORS();
 }

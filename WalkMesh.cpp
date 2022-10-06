@@ -149,7 +149,7 @@ void WalkMesh::walk_in_triangle(WalkPoint const &start, glm::vec3 const &step, W
 	float w_a = start.weights[0] + time*bary_step[0];
 	float w_b = start.weights[1] + time*bary_step[1];
 	float w_c = start.weights[2] + time*bary_step[2];
-	std::cout << "Weights Init" << " " << w_a << " " << w_b << " " << w_c << "\n";
+
 
 
 	if (w_a >= 0 && w_a <= 1 && w_b >= 0 && w_b <= 1 && w_c >= 0 && w_c <= 1) {
@@ -162,7 +162,6 @@ void WalkMesh::walk_in_triangle(WalkPoint const &start, glm::vec3 const &step, W
 	float t_b = -start.weights[1]/bary_step[1];
 	float t_c = -start.weights[2]/bary_step[2];
 
-	std::cout << "Times" << " " << t_a << " " << t_b << " " << t_c << "\n";
 
 	
 	
@@ -175,13 +174,11 @@ void WalkMesh::walk_in_triangle(WalkPoint const &start, glm::vec3 const &step, W
 	if (t_c < time && t_c >= 0)
 		time = t_c;
 
-	std::cout << "Time " << time << "\n";
 	
 	w_a = start.weights[0] + time*bary_step[0];
 	w_b = start.weights[1] + time*bary_step[1];
 	w_c = start.weights[2] + time*bary_step[2];
 
-	std::cout << "Pre Weights" << w_a << " " << w_b << " " << w_c << "\n";
 
 
 	
@@ -196,24 +193,23 @@ void WalkMesh::walk_in_triangle(WalkPoint const &start, glm::vec3 const &step, W
 	// std::cout << "Pre Weights" << w_a << " " << w_b << " " <<abs(w_c) << "\n";
 
 	if (fabs(w_c) <= 0.01) {
-		std::cout << "C zero\n";
+		// std::cout << "C zero\n";
 		w_c = 0.0f;
 		end = WalkPoint(start.indices, glm::vec3(w_a, w_b, w_c));
 	} else if (fabs(w_b) <= 0.01) {
-		std::cout << "B zero\n";
+		// std::cout << "B zero\n";
 
 		w_b = 0.0f;
 		end = WalkPoint(glm::vec3(start.indices[2], start.indices[0], start.indices[1]), glm::vec3(w_c, w_a, w_b));
 	} else if (fabs(w_a) <= 0.01) {
-		std::cout << "A zero\n";
+		// std::cout << "A zero\n";
 
 		w_a = 0.0f;
 		end = WalkPoint(glm::vec3(start.indices[1], start.indices[2], start.indices[0]), glm::vec3(w_b, w_c, w_a));
 	} else {
 		end = WalkPoint(glm::vec3(start.indices), glm::vec3(w_a, w_b, w_c));
-		std::cout << "Shouldnt be here\n";
+		// std::cout << "Shouldnt be here\n";
 	}
-	std::cout << "Final Weights " << w_a << " " << w_b << " " << w_c << "\n";
 	// time = 0;
 	// end = WalkPoint(start.indices, start.weights);
 

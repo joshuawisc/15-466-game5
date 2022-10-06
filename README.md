@@ -1,8 +1,8 @@
-# (TODO: your game's title)
+# The Last Temple of the Crystal Ark
 
-Author: (TODO: your name)
+Author: Joshua Mathews
 
-Design: (TODO: In two sentences or fewer, describe what is new and interesting about your game.)
+Design: A walking game where you have to dodge obstacles and reach the end.
 
 Screen Shot:
 
@@ -10,9 +10,9 @@ Screen Shot:
 
 How To Play:
 
-(TODO: describe the controls and (if needed) goals/strategy.)
+WASD to move, mouse controls camera.
 
-Sources: (TODO: list a source URL for any assets you did not create yourself. Make sure you have a license for the asset.)
+Sources: Walkmesh code from class assignment.
 
 This game was built with [NEST](NEST.md).
 
