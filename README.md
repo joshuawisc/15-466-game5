@@ -2,7 +2,7 @@
 
 Author: Joshua Mathews
 
-Design: A walking game where you have to dodge obstacles and reach the end.
+Design: A walking game where you have to dodge obstacles and reach the end..
 
 Screen Shot:
 
